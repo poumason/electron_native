@@ -1,5 +1,15 @@
-/obj/
-/bin/
-
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+[Rr]elease_Insider/
+[Rr]elease_Log/
+x64/
+x86/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
 /node_modules/
 package-lock.json
