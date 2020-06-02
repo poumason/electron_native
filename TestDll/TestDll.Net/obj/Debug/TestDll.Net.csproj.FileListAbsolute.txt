@@ -1,0 +1,7 @@
+C:\Users\pouma\source\repos\TestDll\TestDll.Net\bin\Debug\TestDll.Net.dll
+C:\Users\pouma\source\repos\TestDll\TestDll.Net\bin\Debug\TestDll.Net.pdb
+C:\Users\pouma\source\repos\TestDll\TestDll.Net\obj\Debug\TestDll.Net.csproj.CoreCompileInputs.cache
+C:\Users\pouma\source\repos\TestDll\TestDll.Net\obj\Debug\TestDll.Net.dll
+C:\Users\pouma\source\repos\TestDll\TestDll.Net\obj\Debug\TestDll.Net.pdb
+C:\Users\pouma\source\repos\TestDll\TestDll.Net\bin\Debug\Windows.Foundation.UniversalApiContract.winmd
+C:\Users\pouma\source\repos\TestDll\TestDll.Net\obj\Debug\TestDll.Net.csproj.CopyComplete
