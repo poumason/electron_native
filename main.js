@@ -20,18 +20,42 @@ function createWindow() {
   win.webContents.openDevTools()
 
   var driver = edge.func({
-    assemblyFile: path.resolve('TestDll.Net.dll'),
+    assemblyFile: path.resolve('./TestDll/TestDll.Net/bin/Debug/TestDll.Net.dll'),
     typeName: 'TestDll.Net.MyAudioPlayer',
     methodName: 'Play'
   })
 
-  driver(null, function (err, result) {
-    if (err) {
-      throw err;
-    } else {
-      console.log(result);
+  // driver(null, function (err, result) {
+  //   if (err) {
+  //     throw err;
+  //   } else {
+  //     console.log(result);
+  //   }
+  // });
+  driver({
+    interval: 2000,
+    event_handler: function (data, cb) {
+      console.log('Received event', data);
+      cb();
+    },
+    stream_end: function(data, cb) {
+      console.log("stream end");
+      cb();
     }
+  }, function (error, unsubscribe) {
+    if (error) throw error;
+    console.log('Subscribed to .NET events. Unsubscribing in 7 seconds...');
+    // setTimeout(function () {
+    //   unsubscribe(null, function (error) {
+    //     if (error) throw error;
+    //     console.log('Unsubscribed from .NET events.');
+    //     console.log('Waiting 5 seconds before exit to show that no more events are generated...')
+    //     setTimeout(function () { }, 5000);
+    //   });
+    // }, 7000);
+    console.log(unsubscribe);
   });
+
 }
 
 // This method will be called when Electron has finished
