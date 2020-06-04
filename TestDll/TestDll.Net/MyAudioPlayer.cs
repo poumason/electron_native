@@ -32,12 +32,19 @@ namespace TestDll.Net
             var url = "https://pebblebus.blob.core.windows.net/pebble/love.mp3";
             url = "https://pebblebus.blob.core.windows.net/pebble/01.mp3";
 
+            var reader = new MediaFoundationReader(url);
+            woEvent.Init(reader);
+
             timer.Elapsed += (object sender, System.Timers.ElapsedEventArgs e) =>
             {
                 if (woEvent.PlaybackState == PlaybackState.Playing)
                 {
                     var ms = woEvent.GetPositionTimeSpan().GetSongPositionString();
-                    ((Func<object, Task<object>>)param.event_handler)(ms).Start();
+                    ((Func<object, Task<object>>)param.event_handler)(new TrackTimespan
+                    {
+                        Position = ms,
+                        Duration = reader.TotalTime.GetSongPositionString()
+                    }).Start();
                 }
                 else if (woEvent.PlaybackState == PlaybackState.Stopped)
                 {
@@ -54,8 +61,6 @@ namespace TestDll.Net
             //    ((Func<object, Task<object>>)param.stream_end)(e).Start();
             //};
 
-            woEvent.Init(new MediaFoundationReader(url));
-
             timer.Enabled = true;
             timer.Start();
 
@@ -63,7 +68,8 @@ namespace TestDll.Net
 
             // Return a function that can be used by Node.js to 
             // unsubscribe from the event source.
-            return (Func<object, Task<object>>)(async (dynamic data) => {
+            return (Func<object, Task<object>>)(async (dynamic data) =>
+            {
                 timer.Enabled = false;
                 return "OK";
             });
@@ -73,6 +79,13 @@ namespace TestDll.Net
         {
             //player.Pause();
         }
+    }
+
+    public class TrackTimespan
+    {
+        public string Duration { get; set; }
+
+        public string Position { get; set; }
     }
 
     public static class TimeSpanExtensions
@@ -93,4 +106,4 @@ namespace TestDll.Net
         }
 
     }
-    }
+}

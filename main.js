@@ -20,7 +20,7 @@ function createWindow() {
   win.webContents.openDevTools()
 
   var driver = edge.func({
-    assemblyFile: path.resolve('./TestDll/TestDll.Net/bin/Debug/TestDll.Net.dll'),
+    assemblyFile: path.resolve('./dll/TestDll.Net.dll'),
     typeName: 'TestDll.Net.MyAudioPlayer',
     methodName: 'Play'
   })
@@ -32,13 +32,14 @@ function createWindow() {
   //     console.log(result);
   //   }
   // });
+  
   driver({
     interval: 2000,
     event_handler: function (data, cb) {
-      console.log('Received event', data);
+      console.log("duration: %s, position: %s", data.Duration, data.Position);
       cb();
     },
-    stream_end: function(data, cb) {
+    stream_end: function (data, cb) {
       console.log("stream end");
       cb();
     }
