@@ -18,7 +18,7 @@
   },
   "homepage": "https://github.com/poumason/electron_native#readme",
   "dependencies": {
-    "electron": "^8.3.1",
+    "electron": "^11.0.3",
     "electron-edge-js": "^12.14.1"
   }
 }
